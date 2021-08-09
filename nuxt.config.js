@@ -46,19 +46,33 @@ export default {
   build: {
   },
 
+  // Pagination ページ設定
+  router: {
+    extendRoutes(routes,resolve) {
+      routes.push({
+        path: '/page/:p',
+        component: resolve(__dirname, 'pages/index.vue'),
+        name: 'page',
+      })
+    }
+  },
+
   generate: {
     async routes() {
+      const limit = 10
+      const range = (start, end) =>
+        [...Array(end - start + 1)].map((_, i) => start + i)
+
       const pages = await axios
-        .get('https://icolumn.microcms.io/api/v1/posts?limit=100', {
+        .get('https://icolumn.microcms.io/api/v1/posts?limit=0', {
           headers: { 'X-API-KEY': 'c1531420-9002-48fe-a986-5671f608cd2c' }
         })
         .then((res) =>
-          res.data.contents.map((content) => ({
-            route: `/${content.id}`,
-            payload: content
+          range(1, Math.ceil(res.data.totalCount / limit)).map((p) => ({
+          route: `/page/${p}`,
           }))
         )
-      return pages
+      // return pages
     }
   }
 }

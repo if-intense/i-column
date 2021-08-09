@@ -11,12 +11,18 @@
 <script>
 import axios from 'axios'
 export default {
-  async asyncData() {
+  async asyncData(params) {
+
+    // adding for pagination
+    const page = params.p|| '1'
+    const limit = 10
+
     const { data } = await axios.get(
-      // your-service-id部分は自分のサービスidに置き換えてください
-      'https://icolumn.microcms.io/api/v1/posts',
+      
+      // add ?limit-${limit}&offset=${(page - 1)* limit}
+      'https://icolumn.microcms.io/api/v1/posts?limit=${limit}&offset=${(page - 1) * limit}',
       {
-        // your-api-key部分は自分のapi-keyに置き換えてください
+        
         headers: { 'X-API-KEY': 'c1531420-9002-48fe-a986-5671f608cd2c' }
       }
     )
