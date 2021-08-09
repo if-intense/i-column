@@ -20,10 +20,10 @@ export default {
     const { data } = await axios.get(
       
       // add ?limit-${limit}&offset=${(page - 1)* limit}
-      'https://icolumn.microcms.io/api/v1/posts?limit=${limit}&offset=${(page - 1) * limit}',
+      'https://i-columnblog.microcms.io/api/v1/column?limit=${limit}&offset=${(page - 1) * limit}',
       {
         
-        headers: { 'X-API-KEY': 'c1531420-9002-48fe-a986-5671f608cd2c' }
+        headers: { 'X-API-KEY': '8af4ace2-1340-419c-9101-f57ca02a6ec9' }
       }
     )
     return data

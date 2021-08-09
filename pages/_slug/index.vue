@@ -2,7 +2,7 @@
   <main class="main">
     <h1 class="title">{{ title }}</h1>
     <p class="publishedAt">{{ publishedAt }}</p>
-    <p class="category">{{category && category.name}}</p>
+    <p class="category">{{category && category.category-select}}</p>
     <div class="post" v-html="body"></div>
   </main>
 </template>
@@ -13,9 +13,9 @@ import axios from 'axios'
 export default {
   async asyncData({ params }) {
     const { data } = await axios.get(
-      `https://icolumn.microcms.io/api/v1/posts/${params.slug}`,
+      `https://i-columnblog.microcms.io/api/v1/column/${params.slug}`,
       {
-        headers: { 'X-API-KEY': 'c1531420-9002-48fe-a986-5671f608cd2c' }
+        headers: { 'X-API-KEY': '8af4ace2-1340-419c-9101-f57ca02a6ec9' }
       }
     )
     return data
